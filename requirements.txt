@@ -1,6 +1,0 @@
-Python==3.7.4
-Django==3.0.2
-
-database==PostgreSQL 12
-
-database connector-psycopg2==2.8.5
