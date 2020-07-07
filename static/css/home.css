@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url('../images/back.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 900px;
+}
+.alert{
+    z-index: 1;
+}
+nav{
+    background-color: #343a4040;
+    z-index: 1;
+}
+.navbar-brand{
+    font-size: 40px;
+    padding: 0;
+    border-bottom: 1px solid #ffc107;
+}
+li a{
+    font-size: 20px;
+    color: #ffffff;
+}
+li a:hover{
+    color: rgb(197, 197, 197);
+}
+
+.jumbotron{
+    background: none;
+    font-family: 'raleway';
+}
+.jumbotron span{
+    font-size: 110px;
+    letter-spacing: 5px;
+    border-bottom: 2px solid #ffc107;
+    text-shadow: 10px 4px 25px black;
+
+}
+.destinations{
+    margin-top: 300px;
+}
+
+.row{
+    margin-left: 5%;
+}
+.card{
+    background-color: rgba(20, 19, 19, 0.55);
+    width: 400px;
+    height: 500px;
+}
+.card-img{
+    width: 100%;
+    height: auto;
+}
+.col-md-3{
+    margin: 0 35px;
+}
+
+#greet{
+    color: white;
+}

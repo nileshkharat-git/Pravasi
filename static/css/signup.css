@@ -1,0 +1,8 @@
+form{
+    position: relative;
+    top: 150px;
+}
+form label{
+    font-size: 22px;
+    color: white;
+}

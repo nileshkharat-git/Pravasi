@@ -1,0 +1,56 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block head %}
+<style>
+.card{
+    height: 560px;
+}
+.card-body{
+    padding-top: 10px;
+}
+.card-footer p{
+    padding-top: 0;
+}
+h6{
+    display: inline;
+}
+</style>
+<title>Explore</title>
+{% endblock %}
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4 text-light mt-4">Explore your trip</h1>
+</div>
+<div class="row">
+    {% for place in destination %}
+    <div class="col-md-3 mt-4">
+        <div class="card text-center text-light">
+            <form action="{% url 'booking' %}" method="GET">
+                <div class="card-header">
+                    {{place.Address}}
+                    {% if place.inOffer %}
+                        <img src="{% static 'images/offer.png'%}" alt="" width="120px" height="100px" style="position: absolute;">
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <input type="hidden" name="place" value="{{place.Place}}">
+                   
+                    <h5 class="card-title">{{place.Place}}</h5>
+                   
+                    <h6 class="card-text" id="{{place.Place}}">{{place.RateOfTicket}}</h6><span> &#8377;/-</span>
+                    {% if place.Photo %}
+                    <img src="{{ place.Photo.url }}"  class="card-img-top mb-4" alt="...">
+                    {% else %}
+                    <img src="..." class="card-img-top mb-4" alt="Image not availabel">
+                    {% endif %}
+                    <button class="btn btn-primary btn-block" type="submit">Book ticket now</button>
+                </div>
+                <div class="card-footer text-muted">
+                    <p class="card-text text-light">{{place.Description}}</p>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock%}

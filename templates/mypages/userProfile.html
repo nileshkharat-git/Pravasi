@@ -1,0 +1,53 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/userProfile.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        {% if user.profilePic %}
+        <img src="{{user.profilePic.url}}" class="rounded-circle mt-3" alt="..." width="250px" height="250px">
+        {% else %}
+        <img src="" alt="">
+        {% endif %}
+        <div class="jumbotron text-dark h3">
+            <form action="" id="update" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <label>{{field.label_tag}}</label>
+                    {{field}}
+                    <br>
+                    {% endfor %}
+                    <button class="btn btn-primary" type="submit">Update profile</button>
+                </div>
+            </form>
+            <div>
+                <table class=" table text-dark table-condenced table-striped" colspan="2">
+                    <thead>
+                        <tr>
+                            <th>Your Journey</th>
+                            <th>No. Passanger</th>
+                            <th>Total Bill</th>
+                            <th>Date of journey</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in cust %}
+                        <tr>
+                            <td>{{record.place}}</td>
+                            <td>{{record.noPassenger}}</td>
+                            <td>{{record.total}}&#8377;</td>
+                            <td>{{record.DOJ}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
