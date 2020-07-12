@@ -5,7 +5,8 @@ def home(request):
 
 def explorer(request):
     destination=Destinations.objects.all()
-    return render(request,'mypages/Explore.html',{'destination':destination})
+    offer_rate=20.0
+    return render(request,'mypages/Explore.html',{'destination':destination,'off':offer_rate})
 
 def userProfile(request):
     return render(request,'mypages/userProfile.html')

@@ -33,6 +33,10 @@ def booking(request):
         user.save()
 
         return redirect(myprofile,request.POST['email'])
+
     book_entry=Destinations.objects.get(Place=request.GET['place'])
+    if(book_entry.inOffer):
+        book_entry.RateOfTicket=book_entry.RateOfTicket-((book_entry.RateOfTicket/100)*20)
+
     return render(request,'mypages/booking.html',{'book':book_entry})
 

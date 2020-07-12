@@ -2,44 +2,60 @@
 {% load static %}
 {% block head %}
 <style>
-.card{
-    height: 560px;
-}
-.card-body{
-    padding-top: 10px;
-}
-.card-footer p{
-    padding-top: 0;
-}
-h6{
-    display: inline;
-}
+    .card {
+        height: 560px;
+    }
+
+    .card-body {
+        padding-top: 10px;
+    }
+
+    .card-footer p {
+        padding-top: 0;
+    }
+
+    h6 {
+        display: inline;
+    }
+
+    #strip {
+        color: white;
+        border: 1px solid black;
+        box-shadow: 10px 5px 40px 5px black;
+        text-align: left;
+        padding: 10px;
+        height: 90px;
+    }
 </style>
 <title>Explore</title>
 {% endblock %}
 {% block content %}
-<div class="jumbotron text-center">
+<div class="jumbotron text-center" id="hanger">
     <h1 class="display-4 text-light mt-4">Explore your trip</h1>
+    <div id="strip">
+        <input type="checkbox" name="OfferSelect" id="OfferSelect"> Only offer
+    </div>
 </div>
 <div class="row">
     {% for place in destination %}
-    <div class="col-md-3 mt-4">
-        <div class="card text-center text-light">
-            <form action="{% url 'booking' %}" method="GET">
+    <div class="col-md-3 col-sm-1 mt-4">
+        <form action="{% url 'booking' %}" method="GET">
+            <div class="card text-center text-light">
                 <div class="card-header">
                     {{place.Address}}
                     {% if place.inOffer %}
-                        <img src="{% static 'images/offer.png'%}" alt="" width="120px" height="100px" style="position: absolute;">
+                    <img class="off" src="{% static 'images/offer.png'%}" alt="" width="120px" height="100px"
+                        style="position:absolute;">
                     {% endif %}
                 </div>
                 <div class="card-body">
                     <input type="hidden" name="place" value="{{place.Place}}">
-                   
+
                     <h5 class="card-title">{{place.Place}}</h5>
-                   
-                    <h6 class="card-text" id="{{place.Place}}">{{place.RateOfTicket}}</h6><span> &#8377;/-</span>
+
+                    <h6 class="card-text">{{place.RateOfTicket}}</h6><span> &#8377;/-</span>
                     {% if place.Photo %}
-                    <img src="{{ place.Photo.url }}"  class="card-img-top mb-4" alt="...">
+                    <img src="{{ place.Photo.url }}" class="card-img-top mb-4" alt="...">
                     {% else %}
                     <img src="..." class="card-img-top mb-4" alt="Image not availabel">
                     {% endif %}
@@ -48,9 +64,27 @@ h6{
                 <div class="card-footer text-muted">
                     <p class="card-text text-light">{{place.Description}}</p>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
     {% endfor %}
 </div>
+<script>
+    var getPer = function (amt = Number(), per = Number()) {
+        return amt - ((amt / 100) * per)
+    }
+    var a = $('.card').has('.off');
+    for (let i in a) {
+
+        let final = a[i].getElementsByClassName('card-body')[0].getElementsByTagName('h6')[0];
+        // console.log(Number($(final).html())-200);
+        $(final).css('text-decoration', 'line-through');
+        var result = getPer(Number($(final).html()), '{{off}}');
+        console.log(result);
+        $(final).after((`&#8377;/- <span>${result}.0</span>`));
+
+
+    }
+
+</script>
 {% endblock%}

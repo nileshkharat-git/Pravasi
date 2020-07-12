@@ -90,9 +90,11 @@
     <div class="container">
         <div class="jumbotron text-center">
             {% if user.is_authenticated %}
-                    <h1 class="display-4 text-light mt-5">Hello,{{user.username}}<br>Welcome on <br><span class="display-2 text-warning">pravasi</span></h1>
+            <h1 class="display-4 text-light mt-5">Hello,{{user.username}}<br>Welcome on <br><span
+                    class="display-2 text-warning">pravasi</span></h1>
             {% else %}
-                    <h1 class="display-4 text-light mt-5">Hello.<br>Welcome on <br><span class="display-2 text-warning">pravasi</span></h1>
+            <h1 class="display-4 text-light mt-5">Hello.<br>Welcome on <br><span
+                    class="display-2 text-warning">pravasi</span></h1>
             {% endif %}
             <h2 id="greet">Get your best trip here.</h2>
         </div>

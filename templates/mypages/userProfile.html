@@ -12,13 +12,13 @@
         <img src="" alt="">
         {% endif %}
         <div class="jumbotron text-dark h3">
-            <form action="" id="update" method="post" enctype="multipart/form-data">
+            <form id="update" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     {% csrf_token %}
                     {% for field in form %}
                     <label>{{field.label_tag}}</label>
                     {{field}}
-                    <br>
+                    <hr>
                     {% endfor %}
                     <button class="btn btn-primary" type="submit">Update profile</button>
                 </div>
