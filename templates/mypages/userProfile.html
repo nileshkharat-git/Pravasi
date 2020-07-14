@@ -9,19 +9,19 @@
         {% if user.profilePic %}
         <img src="{{user.profilePic.url}}" class="rounded-circle mt-3" alt="..." width="250px" height="250px">
         {% else %}
-        <img src="" alt="">
+        <img src="..." alt="Image not uploaded.">
         {% endif %}
         <div class="jumbotron text-dark h3">
             <form id="update" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="form-group">
-                    {% csrf_token %}
-                    {% for field in form %}
-                    <label>{{field.label_tag}}</label>
-                    {{field}}
-                    <hr>
-                    {% endfor %}
-                    <button class="btn btn-primary" type="submit">Update profile</button>
+                    {{form.username}}
                 </div>
+                
+                <div class="custom-file">
+                    {{form.profilePic}}
+                </div>
+                <button class="btn btn-primary mt-3 mb-3" type="submit">Update profile</button>
             </form>
             <div>
                 <table class=" table text-dark table-condenced table-striped" colspan="2">
@@ -48,6 +48,12 @@
         </div>
     </div>
 </div>
+<script>
+    $('form a').remove();
+    $('.custom-file').html(`
+        <input  type=\"file\" name=\"profilePic\" id=\"id_profilePic\">`);
+    
+</script>
 
 
 {% endblock %}

@@ -10,10 +10,10 @@ def userSignup(request):
         form=RegiForm(request.POST)
         if form.is_valid():
             form.save()
-            success(request,'User created successfully')
+            success(request,'User created successfully.')
             return redirect('/user/login/')
         else:
-            error(request,'User Signup Failed')
+            error(request,'User Signup Failed.')
             return redirect('/user/signup/')
     else:
         form=RegiForm()

@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import customer
+from django.contrib.messages import error,success
 from main.models import accounts
 from .forms import updateProfile
 from main.models import Destinations
 from django.contrib.auth.decorators import login_required
+
 
 
 @login_required(login_url='/user/login/')
@@ -13,6 +15,7 @@ def myprofile(request,email):
     form=updateProfile(request.POST or None,request.FILES or None,instance=accounts.objects.get(email=email))
     if form.is_valid():
         form.save()
+        success(request,"Profile has been updated.")
         return redirect(myprofile,email)
     return render(request,'mypages/userProfile.html',{'cust':cust,'form':form})
 

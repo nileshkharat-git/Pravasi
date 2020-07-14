@@ -20,4 +20,14 @@
 }
 #update{
     font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}   
+form input{
+    font-size: 20px;
+}
+#id_profilePic{
+    background: none;
+    border: none;
+    border: 1px solid #ced4da;
+    border-radius: 2px;
 }

@@ -17,14 +17,20 @@
     h6 {
         display: inline;
     }
-
+    .row{
+        margin-left: 150px;
+    }
     #strip {
         color: white;
         border: 1px solid black;
         box-shadow: 10px 5px 40px 5px black;
         text-align: left;
-        padding: 10px;
+        padding:10px 0px 0 10px;
+        margin-left:0; 
         height: 90px;
+        width: 160px;
+        position: fixed;
+        left: 10px;
     }
 </style>
 <title>Explore</title>
@@ -33,7 +39,7 @@
 <div class="jumbotron text-center" id="hanger">
     <h1 class="display-4 text-light mt-4">Explore your trip</h1>
     <div id="strip">
-        <input type="checkbox" name="OfferSelect" id="OfferSelect"> Only offer
+        <input type="checkbox" id="OfferSelect" onclick="chbox()"> Only offer
     </div>
 </div>
 <div class="row">
@@ -70,21 +76,40 @@
     {% endfor %}
 </div>
 <script>
-    var getPer = function (amt = Number(), per = Number()) {
-        return amt - ((amt / 100) * per)
-    }
-    var a = $('.card').has('.off');
-    for (let i in a) {
+    $(document).ready(function () {
+        var getPer = function (amt = Number(), per = Number()) {
+            return amt - ((amt / 100) * per)
+        }
 
-        let final = a[i].getElementsByClassName('card-body')[0].getElementsByTagName('h6')[0];
-        // console.log(Number($(final).html())-200);
-        $(final).css('text-decoration', 'line-through');
-        var result = getPer(Number($(final).html()), '{{off}}');
-        console.log(result);
-        $(final).after((`&#8377;/- <span>${result}.0</span>`));
+        var a = $('.card').has('.off');
+        for (let i in a) {
 
+            let final = a[i].getElementsByClassName('card-body')[0].getElementsByTagName('h6')[0];
+            $(final).css('text-decoration', 'line-through');
+            var result = getPer(Number($(final).html()), '{{off}}');
+            $(final).after((`&#8377;/- <span>${result}.0</span>`));
+        }
 
-    }
+    });
+
+    var ls = new Array();
+    function chbox() {
+        var checked = $('#OfferSelect').prop('checked');
+        if (checked == true) {
+            let ele = $('.col-md-3');
+            $('.row').empty();
+            for (let i = 0; i < ele.length; i++) {
+                ls.push(ele[i]);
+                $('.row').append($(ele[i]).has('.off'));
+            }
+        }
+        else if (checked == false) {
+            for(let i=0;i<ls.length;i++){
+                $('.row').append(ls[i]);
+            }
+        }
+    };
+
 
 </script>
 {% endblock%}
